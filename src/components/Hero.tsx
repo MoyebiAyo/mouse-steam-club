@@ -102,7 +102,7 @@ export default function Hero() {
                     d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
                   />
                 </defs>
-                <text className="text-[11px] font-bold fill-primary-blue uppercase tracking-wider">
+                <text className="text-[14px] font-bold fill-primary-blue uppercase tracking-wider">
                   <textPath href="#circlePath" startOffset="0%">
                     {theme === "dark" ? "✨ Click me to turn on the light ✨ " : "💡 Click me to turn off the light 💡 "}
                   </textPath>
