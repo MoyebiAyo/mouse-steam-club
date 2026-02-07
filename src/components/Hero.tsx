@@ -76,7 +76,7 @@ export default function Hero() {
           {!isLaunching && (
             <motion.div
               key="rocket-container"
-              className="hidden lg:block absolute top-20 left-10"
+              className="absolute top-4 left-4 lg:top-20 lg:left-10"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1, y: [0, -20, 0] }}
               exit={{ opacity: 0, scale: 0.5 }}
@@ -88,7 +88,7 @@ export default function Hero() {
             >
               {/* Circular rotating text */}
               <motion.div
-                className="absolute inset-0 -m-12"
+                className="absolute inset-0 -m-8 lg:-m-12"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
               >
@@ -99,9 +99,9 @@ export default function Hero() {
                       d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
                     />
                   </defs>
-                  <text className="text-[13px] font-bold fill-secondary-purple uppercase tracking-wider">
+                  <text className="text-[10px] lg:text-[13px] font-bold fill-secondary-purple uppercase tracking-wider">
                     <textPath href="#rocketCirclePath" startOffset="0%">
-                      🚀 Hover 3 times to launch! 🚀 
+                      🚀 Tap 3x! 🚀 
                     </textPath>
                   </text>
                 </svg>
@@ -123,7 +123,16 @@ export default function Hero() {
 
               {/* Rocket */}
               <motion.div
-                className="relative p-4 bg-card-bg rounded-3xl shadow-2xl text-primary-blue border border-border-color cursor-pointer"
+                className="relative p-3 lg:p-4 bg-card-bg rounded-3xl shadow-2xl text-primary-blue border border-border-color cursor-pointer"
+                onTouchStart={() => {
+                  if (hoverCount < 3) {
+                    setHoverCount(prev => prev + 1);
+                    setShowCountdown(true);
+                    if (hoverCount === 2) {
+                      setTimeout(() => setIsLaunching(true), 300);
+                    }
+                  }
+                }}
                 onHoverStart={() => {
                   if (hoverCount < 3) {
                     setHoverCount(prev => prev + 1);
@@ -138,8 +147,11 @@ export default function Hero() {
                   rotate: [0, -10, 10, -10, 0],
                   transition: { duration: 0.5 }
                 }}
+                whileTap={{
+                  scale: 0.95
+                }}
               >
-                <Rocket size={40} />
+                <Rocket size={32} className="lg:w-10 lg:h-10" />
               </motion.div>
             </motion.div>
           )}
@@ -150,7 +162,7 @@ export default function Hero() {
           {isLaunching && (
             <motion.div
               key="launching-rocket"
-              className="hidden lg:block absolute top-20 left-10"
+              className="absolute top-4 left-4 lg:top-20 lg:left-10"
               initial={{ y: 0, x: 0, rotate: 0, opacity: 1 }}
               animate={{
                 y: -800,
@@ -171,8 +183,8 @@ export default function Hero() {
                 }, 1000);
               }}
             >
-              <div className="relative p-4 bg-card-bg rounded-3xl shadow-2xl text-primary-blue border border-border-color">
-                <Rocket size={40} />
+              <div className="relative p-3 lg:p-4 bg-card-bg rounded-3xl shadow-2xl text-primary-blue border border-border-color">
+                <Rocket size={32} className="lg:w-10 lg:h-10" />
                 {/* Exhaust flames during launch */}
                 <motion.div
                   className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full"
