@@ -34,7 +34,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl lg:text-7xl font-bold tracking-tight text-foreground mb-6 leading-tight"
+            className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-foreground mb-6 leading-tight"
           >
             Inspiring Young <span className="text-primary-blue">Innovators</span> Through <span className="text-secondary-purple">STEAM</span>
           </motion.h1>
@@ -200,7 +200,7 @@ export default function Hero() {
             </motion.div>
           )}
         </AnimatePresence>
-        <motion.div className="absolute bottom-4 right-4 lg:bottom-20 lg:right-10">
+        <motion.div className="absolute bottom-4 right-4 lg:bottom-20 lg:right-10 z-20">
           {/* Wire */}
           <motion.div className="absolute bottom-full left-1/2 -translate-x-1/2 w-0.5 h-16 lg:h-24 bg-gradient-to-b from-border-color to-secondary-purple origin-bottom" animate={{ scaleY: [1, 0.98, 1], opacity: [0.6, 0.8, 0.6] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
           
