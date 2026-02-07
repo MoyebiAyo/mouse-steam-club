@@ -1,12 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Sparkles, Rocket, Lightbulb } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
+import { useState, useEffect } from "react";
 
 export default function Hero() {
   const { theme, setTheme } = useTheme();
+  const [hoverCount, setHoverCount] = useState(0);
+  const [isLaunching, setIsLaunching] = useState(false);
+  const [showCountdown, setShowCountdown] = useState(false);
   return (
     <section className="relative overflow-hidden py-20 lg:py-32 bg-background transition-colors duration-300">
       {/* Background patterns */}
@@ -67,12 +71,103 @@ export default function Hero() {
         </div>
 
         {/* Floating elements for visual flair */}
+        {/* Interactive Rocket with Launch Countdown */}
         <motion.div
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="hidden lg:block absolute top-20 left-10 p-4 bg-card-bg rounded-3xl shadow-2xl text-primary-blue border border-border-color"
+          className="hidden lg:block absolute top-20 left-10"
+          animate={isLaunching ? {
+            y: -800,
+            x: 100,
+            rotate: -45,
+            opacity: [1, 1, 0]
+          } : { y: [0, -20, 0] }}
+          transition={isLaunching ? {
+            duration: 2,
+            ease: "easeIn"
+          } : {
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          onAnimationComplete={() => {
+            if (isLaunching) {
+              setTimeout(() => {
+                setIsLaunching(false);
+                setHoverCount(0);
+                setShowCountdown(false);
+              }, 3000);
+            }
+          }}
         >
-          <Rocket size={40} />
+          {/* Circular rotating text */}
+          <motion.div
+            className="absolute inset-0 -m-12"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          >
+            <svg viewBox="0 0 200 200" className="w-full h-full">
+              <defs>
+                <path
+                  id="rocketCirclePath"
+                  d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
+                />
+              </defs>
+              <text className="text-[13px] font-bold fill-secondary-purple uppercase tracking-wider">
+                <textPath href="#rocketCirclePath" startOffset="0%">
+                  🚀 Hover 3 times to launch! 🚀 
+                </textPath>
+              </text>
+            </svg>
+          </motion.div>
+
+          {/* Countdown Badge */}
+          <AnimatePresence>
+            {showCountdown && hoverCount > 0 && (
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                exit={{ scale: 0, rotate: 180 }}
+                className="absolute -top-2 -right-2 w-8 h-8 bg-primary-blue text-white rounded-full flex items-center justify-center font-bold text-sm shadow-lg z-10"
+              >
+                {4 - hoverCount}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Rocket with trail effect */}
+          <motion.div
+            className="relative p-4 bg-card-bg rounded-3xl shadow-2xl text-primary-blue border border-border-color cursor-pointer"
+            onHoverStart={() => {
+              if (!isLaunching && hoverCount < 3) {
+                setHoverCount(prev => prev + 1);
+                setShowCountdown(true);
+                if (hoverCount === 2) {
+                  setTimeout(() => setIsLaunching(true), 300);
+                }
+              }
+            }}
+            whileHover={!isLaunching ? {
+              scale: 1.1,
+              rotate: [0, -10, 10, -10, 0],
+              transition: { duration: 0.5 }
+            } : {}}
+          >
+            <Rocket size={40} />
+            
+            {/* Exhaust flames during launch */}
+            {isLaunching && (
+              <motion.div
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full"
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: [0, 1, 0.8, 0],
+                  scale: [0.5, 1, 1.5, 2]
+                }}
+                transition={{ duration: 2, ease: "easeOut" }}
+              >
+                <div className="text-4xl">🔥</div>
+              </motion.div>
+            )}
+          </motion.div>
         </motion.div>
         <motion.div className="hidden lg:block absolute bottom-20 right-10">
           {/* Wire */}
