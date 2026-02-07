@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 
 export default function Hero() {
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   return (
     <section className="relative overflow-hidden py-20 lg:py-32 bg-background transition-colors duration-300">
       {/* Background patterns */}
