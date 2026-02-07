@@ -1,20 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Menu, X, MousePointer2, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
-import Image from "next/image";
-
-const navLinks = [
-  { name: "About", href: "/#about" },
-  { name: "The Lead", href: "/#lead" },
-  { name: "Outreach", href: "/#outreach" },
-  { name: "Programs", href: "/#programs" },
-  { name: "Projects", href: "/#projects" },
-  { name: "Events", href: "/#events" },
-];
+import { navLinks } from "@/constants/navigation";
+import { themeToggleTransition } from "@/constants/animations";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,11 +21,14 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border-color">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link href="/" className="flex items-center">
-            <img 
+          <Link href="/" className="flex items-center" aria-label="Home">
+            <Image 
               src="/logo.png" 
               alt="Mouse STEAM Club Logo" 
-              className={`h-12 w-auto object-contain transition-all ${theme === 'dark' ? 'brightness-0 invert' : ''}`}
+              width={48}
+              height={48}
+              className={`h-12 w-auto object-contain ${theme === 'dark' ? 'brightness-0 invert' : ''}`}
+              priority
             />
           </Link>
 
@@ -51,16 +47,13 @@ export default function Navbar() {
             {/* Theme Toggle */}
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2.5 rounded-xl bg-card-bg border border-border-color text-foreground/70 hover:text-primary-blue transition-all cursor-pointer relative overflow-hidden"
+              className="p-2.5 rounded-xl bg-card-bg border border-border-color text-foreground/70 hover:text-primary-blue cursor-pointer relative overflow-hidden"
               aria-label="Toggle theme"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={theme === "dark" ? "dark" : "light"}
-                  initial={{ y: 20, opacity: 0, rotate: 45 }}
-                  animate={{ y: 0, opacity: 1, rotate: 0 }}
-                  exit={{ y: -20, opacity: 0, rotate: -45 }}
-                  transition={{ duration: 0.2 }}
+                  {...themeToggleTransition}
                 >
                   {mounted && (theme === "dark" ? <Sun size={20} /> : <Moon size={20} />)}
                 </motion.div>
@@ -80,14 +73,12 @@ export default function Navbar() {
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="p-2 rounded-lg bg-card-bg text-foreground/70 cursor-pointer relative overflow-hidden"
+              aria-label="Toggle theme"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={theme === "dark" ? "dark" : "light"}
-                  initial={{ y: 20, opacity: 0, rotate: 45 }}
-                  animate={{ y: 0, opacity: 1, rotate: 0 }}
-                  exit={{ y: -20, opacity: 0, rotate: -45 }}
-                  transition={{ duration: 0.2 }}
+                  {...themeToggleTransition}
                 >
                   {mounted && (theme === "dark" ? <Sun size={20} /> : <Moon size={20} />)}
                 </motion.div>

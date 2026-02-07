@@ -43,13 +43,16 @@
 }
 
 @layer base {
-  * {
-    @apply transition-colors duration-500 ease-in-out;
-  }
   body {
     background: var(--background);
     color: var(--foreground);
     @apply antialiased;
+  }
+  button, a, input, textarea, select {
+    @apply transition-all duration-200 ease-out;
+  }
+  .transition-colors {
+    @apply transition-colors duration-300;
   }
 }
 
