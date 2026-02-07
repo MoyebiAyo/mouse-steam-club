@@ -77,9 +77,53 @@ export default function Hero() {
         <motion.div className="hidden lg:block absolute bottom-20 right-10">
           {/* Wire */}
           <motion.div className="absolute bottom-full left-1/2 -translate-x-1/2 w-0.5 h-24 bg-gradient-to-b from-border-color to-secondary-purple origin-bottom" animate={{ scaleY: [1, 0.98, 1], opacity: [0.6, 0.8, 0.6] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
-          {/* Bulb Container */}
-          <motion.div animate={{ y: [0, 20, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="p-4 bg-card-bg rounded-3xl shadow-2xl text-secondary-purple border border-border-color cursor-pointer hover:scale-110 transition-transform active:scale-95">
-            <div className="rotate-180"><Lightbulb size={40} /></div>
+          
+          {/* Bulb Container with Circular Text */}
+          <motion.div 
+            className="relative"
+            animate={{ y: [0, 20, 0] }} 
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          >
+            {/* Circular rotating text */}
+            <motion.div
+              className="absolute inset-0 -m-12"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              whileHover={{ 
+                rotate: [0, 10, -10, 0],
+                scale: 1.1,
+                transition: { duration: 0.5, ease: "easeInOut" }
+              }}
+            >
+              <svg viewBox="0 0 200 200" className="w-full h-full">
+                <defs>
+                  <path
+                    id="circlePath"
+                    d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
+                  />
+                </defs>
+                <text className="text-[11px] font-bold fill-primary-blue uppercase tracking-wider">
+                  <textPath href="#circlePath" startOffset="0%">
+                    {theme === "dark" ? "✨ Click me to turn on the light ✨ " : "💡 Click me to turn off the light 💡 "}
+                  </textPath>
+                </text>
+              </svg>
+            </motion.div>
+
+            {/* Bulb */}
+            <motion.div 
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")} 
+              className="relative p-4 bg-card-bg rounded-3xl shadow-2xl text-secondary-purple border border-border-color cursor-pointer"
+              whileHover={{ 
+                scale: 1.15, 
+                rotate: [0, -5, 5, -5, 0],
+                boxShadow: "0 0 40px rgba(251, 146, 60, 0.8)",
+                transition: { duration: 0.3 }
+              }}
+              whileTap={{ scale: 0.9, rotate: 180 }}
+            >
+              <div className="rotate-180"><Lightbulb size={40} /></div>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>
