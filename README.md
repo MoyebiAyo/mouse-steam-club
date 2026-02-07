@@ -1,3 +1,7 @@
+# Mouse STEAM Club
+
+Educational website for the Mouse STEAM Club - Empowering youth through Science, Technology, Engineering, Arts & Math.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
