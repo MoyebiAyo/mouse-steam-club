@@ -74,13 +74,13 @@ export default function Hero() {
         >
           <Rocket size={40} />
         </motion.div>
-        <motion.div
-          animate={{ y: [0, 20, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="hidden lg:block absolute bottom-20 right-10 p-4 bg-card-bg rounded-3xl shadow-2xl text-secondary-purple border border-border-color cursor-pointer hover:scale-110 transition-transform active:scale-95"
-        >
-          <Lightbulb size={40} />
+        <motion.div className="hidden lg:block absolute bottom-20 right-10">
+          {/* Wire */}
+          <motion.div className="absolute bottom-full left-1/2 -translate-x-1/2 w-0.5 h-24 bg-gradient-to-b from-border-color to-secondary-purple origin-bottom" animate={{ scaleY: [1, 0.98, 1], opacity: [0.6, 0.8, 0.6] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
+          {/* Bulb Container */}
+          <motion.div animate={{ y: [0, 20, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="p-4 bg-card-bg rounded-3xl shadow-2xl text-secondary-purple border border-border-color cursor-pointer hover:scale-110 transition-transform active:scale-95">
+            <div className="rotate-180"><Lightbulb size={40} /></div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
