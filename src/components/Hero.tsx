@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Rocket, Lightbulb } from "lucide-react";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
 export default function Hero() {
+  const { theme, setTheme } = useTheme();
   return (
     <section className="relative overflow-hidden py-20 lg:py-32 bg-background transition-colors duration-300">
       {/* Background patterns */}
@@ -75,7 +77,8 @@ export default function Hero() {
         <motion.div
           animate={{ y: [0, 20, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="hidden lg:block absolute bottom-20 right-10 p-4 bg-card-bg rounded-3xl shadow-2xl text-secondary-purple border border-border-color"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          className="hidden lg:block absolute bottom-20 right-10 p-4 bg-card-bg rounded-3xl shadow-2xl text-secondary-purple border border-border-color cursor-pointer hover:scale-110 transition-transform active:scale-95"
         >
           <Lightbulb size={40} />
         </motion.div>
