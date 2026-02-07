@@ -72,17 +72,18 @@ export default function Hero() {
 
         {/* Floating elements for visual flair */}
         {/* Interactive Rocket with Launch Countdown */}
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {!isLaunching && (
             <motion.div
               key="rocket-container"
               className="hidden lg:block absolute top-20 left-10"
-              initial={{ y: -800, x: 100, opacity: 0 }}
-              animate={{ y: [0, -20, 0] }}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1, y: [0, -20, 0] }}
+              exit={{ opacity: 0, scale: 0.5 }}
               transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
+                opacity: { duration: 0.5 },
+                scale: { duration: 0.5 },
+                y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
               }}
             >
               {/* Circular rotating text */}
