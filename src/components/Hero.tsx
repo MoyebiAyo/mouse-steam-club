@@ -200,9 +200,9 @@ export default function Hero() {
             </motion.div>
           )}
         </AnimatePresence>
-        <motion.div className="hidden lg:block absolute bottom-20 right-10">
+        <motion.div className="absolute bottom-4 right-4 lg:bottom-20 lg:right-10">
           {/* Wire */}
-          <motion.div className="absolute bottom-full left-1/2 -translate-x-1/2 w-0.5 h-24 bg-gradient-to-b from-border-color to-secondary-purple origin-bottom" animate={{ scaleY: [1, 0.98, 1], opacity: [0.6, 0.8, 0.6] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
+          <motion.div className="absolute bottom-full left-1/2 -translate-x-1/2 w-0.5 h-16 lg:h-24 bg-gradient-to-b from-border-color to-secondary-purple origin-bottom" animate={{ scaleY: [1, 0.98, 1], opacity: [0.6, 0.8, 0.6] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
           
           {/* Bulb Container with Circular Text */}
           <motion.div 
@@ -212,7 +212,7 @@ export default function Hero() {
           >
             {/* Circular rotating text */}
             <motion.div
-              className="absolute inset-0 -m-12"
+              className="absolute inset-0 -m-8 lg:-m-12"
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               whileHover={{ 
@@ -228,9 +228,9 @@ export default function Hero() {
                     d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
                   />
                 </defs>
-                <text className="text-[14px] font-bold fill-primary-blue uppercase tracking-wider">
+                <text className="text-[10px] lg:text-[14px] font-bold fill-primary-blue uppercase tracking-wider">
                   <textPath href="#circlePath" startOffset="0%">
-                    {theme === "dark" ? "✨ Click me to turn on the light ✨ " : "💡 Click me to turn off the light 💡 "}
+                    {theme === "dark" ? "✨ Tap! ✨ " : "💡 Tap! 💡 "}
                   </textPath>
                 </text>
               </svg>
@@ -239,7 +239,7 @@ export default function Hero() {
             {/* Bulb */}
             <motion.div 
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")} 
-              className="relative p-4 bg-card-bg rounded-3xl shadow-2xl text-secondary-purple border border-border-color cursor-pointer"
+              className="relative p-3 lg:p-4 bg-card-bg rounded-3xl shadow-2xl text-secondary-purple border border-border-color cursor-pointer"
               whileHover={{ 
                 scale: 1.15, 
                 rotate: [0, -5, 5, -5, 0],
@@ -248,7 +248,7 @@ export default function Hero() {
               }}
               whileTap={{ scale: 0.9, rotate: 180 }}
             >
-              <div className="rotate-180"><Lightbulb size={40} /></div>
+              <div className="rotate-180"><Lightbulb size={32} className="lg:w-10 lg:h-10" /></div>
             </motion.div>
           </motion.div>
         </motion.div>
