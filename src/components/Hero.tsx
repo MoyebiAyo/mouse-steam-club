@@ -76,7 +76,7 @@ export default function Hero() {
           {!isLaunching && (
             <motion.div
               key="rocket-container"
-              className="absolute top-4 left-4 lg:top-20 lg:left-10"
+              className="absolute top-8 right-4 lg:top-20 lg:left-10"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1, y: [0, -20, 0] }}
               exit={{ opacity: 0, scale: 0.5 }}
@@ -162,7 +162,7 @@ export default function Hero() {
           {isLaunching && (
             <motion.div
               key="launching-rocket"
-              className="absolute top-4 left-4 lg:top-20 lg:left-10"
+              className="absolute top-8 right-4 lg:top-20 lg:left-10"
               initial={{ y: 0, x: 0, rotate: 0, opacity: 1 }}
               animate={{
                 y: -800,
