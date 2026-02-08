@@ -71,12 +71,12 @@ export default function Hero() {
         </div>
 
         {/* Floating elements for visual flair */}
-        {/* Interactive Rocket with Launch Countdown */}
+        {/* Interactive Rocket with Launch Countdown - Desktop Only */}
         <AnimatePresence mode="wait">
           {!isLaunching && (
             <motion.div
               key="rocket-container"
-              className="absolute top-8 right-4 lg:top-20 lg:left-10"
+              className="hidden lg:block absolute top-20 left-10"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1, y: [0, -20, 0] }}
               exit={{ opacity: 0, scale: 0.5 }}
@@ -157,12 +157,12 @@ export default function Hero() {
           )}
         </AnimatePresence>
 
-        {/* Launching Rocket */}
+        {/* Launching Rocket - Desktop Only */}
         <AnimatePresence>
           {isLaunching && (
             <motion.div
               key="launching-rocket"
-              className="absolute top-8 right-4 lg:top-20 lg:left-10"
+              className="hidden lg:block absolute top-20 left-10"
               initial={{ y: 0, x: 0, rotate: 0, opacity: 1 }}
               animate={{
                 y: -800,
@@ -200,7 +200,8 @@ export default function Hero() {
             </motion.div>
           )}
         </AnimatePresence>
-        <motion.div className="absolute top-8 left-4 lg:top-auto lg:bottom-20 lg:left-auto lg:right-10 z-20">
+        {/* Lightbulb - Desktop Only */}
+        <motion.div className="hidden lg:block absolute bottom-20 right-10 z-20">
           {/* Wire - Above bulb on mobile (hangs from ceiling), Below bulb on desktop (hangs from bulb) */}
           <motion.div className="absolute bottom-full lg:bottom-full left-1/2 -translate-x-1/2 w-0.5 h-16 lg:h-24 bg-gradient-to-b from-border-color to-secondary-purple origin-bottom" animate={{ scaleY: [1, 0.98, 1], opacity: [0.6, 0.8, 0.6] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
           
