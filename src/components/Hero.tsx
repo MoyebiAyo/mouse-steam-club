@@ -200,9 +200,9 @@ export default function Hero() {
             </motion.div>
           )}
         </AnimatePresence>
-        <motion.div className="absolute top-8 left-4 lg:bottom-20 lg:right-10 z-20">
+        <motion.div className="absolute top-8 left-4 lg:top-auto lg:bottom-20 lg:left-auto lg:right-10 z-20">
           {/* Wire */}
-          <motion.div className="absolute bottom-full left-1/2 -translate-x-1/2 w-0.5 h-16 lg:h-24 bg-gradient-to-b from-border-color to-secondary-purple origin-bottom" animate={{ scaleY: [1, 0.98, 1], opacity: [0.6, 0.8, 0.6] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
+          <motion.div className="absolute top-full lg:bottom-full left-1/2 -translate-x-1/2 w-0.5 h-16 lg:h-24 bg-gradient-to-t lg:bg-gradient-to-b from-border-color to-secondary-purple origin-top lg:origin-bottom" animate={{ scaleY: [1, 0.98, 1], opacity: [0.6, 0.8, 0.6] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
           
           {/* Bulb Container with Circular Text */}
           <motion.div 
